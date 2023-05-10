@@ -1,10 +1,17 @@
-import RangeSlider from 'components/Slider';
+import Schedule from 'components/Schedule';
+
 import React from 'react';
 
 function App() {
   return (
     <>
-      <RangeSlider />;
+      <Schedule />
+      <Schedule />
+      <Schedule />
+      <Schedule />
+      <Schedule />
+      <Schedule />
+      <Schedule />
     </>
   );
 }
