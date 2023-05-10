@@ -1,11 +1,31 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import Slider, { SliderComponentsPropsOverrides, SliderTrack } from '@mui/material/Slider';
 import styled from '@emotion/styled';
+import { Tooltip } from '@mui/material';
+import { ClassNames } from '@emotion/react';
+import './styles.css';
+import classnames from 'classnames';
 
 // function valuetext(value: number) {
 //   return `${value}°C`;
 // }
+
+interface SliderTrackProps {
+  className: string;
+  style: React.CSSProperties;
+}
+
+function ValueLabelComponent(props: SliderTrackProps) {
+  console.log(props);
+
+  const { className, style } = props;
+  return (
+    <div className={classnames(className, 'track_style')} style={style}>
+      <div></div>
+    </div>
+  );
+}
 
 const PrettoSlider = styled(Slider)({
   '& .MuiSlider-valueLabel': {
@@ -33,8 +53,8 @@ const PrettoSlider = styled(Slider)({
   // },
 });
 
-export default function RangeSlider({ chk }: { chk: boolean }) {
-  const dafaultValues: number[] = [14, 16, 20, 22];
+export default function RangeSlider({ disabled }: { disabled: boolean }) {
+  const dafaultValues: number[] = [14, 16];
   const [value, setValue] = React.useState<number[]>(dafaultValues);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -61,42 +81,26 @@ export default function RangeSlider({ chk }: { chk: boolean }) {
       label: '24',
     },
   ];
-  if (chk === true) {
-    return (
-      <Box display="flex" flexDirection="column" m={3} width={500}>
-        <PrettoSlider
-          track="inverted"
-          getAriaLabel={() => 'Temperature range'}
-          value={value}
-          onChange={handleChange}
-          valueLabelDisplay="on"
-          getAriaValueText={getText}
-          step={1}
-          min={6}
-          max={24}
-          marks={customMarks}
-          aria-labelledby="range-slider"
-        />
-      </Box>
-    );
-  } else {
-    return (
-      <Box display="flex" flexDirection="column" m={10} width={500}>
-        <PrettoSlider
-          track="inverted"
-          getAriaLabel={() => 'Temperature range'}
-          value={value}
-          onChange={handleChange}
-          valueLabelDisplay="on"
-          getAriaValueText={getText}
-          step={1}
-          min={6}
-          max={24}
-          marks={customMarks}
-          aria-labelledby="range-slider"
-          disabled
-        />
-      </Box>
-    );
-  }
+
+  return (
+    <Box display="flex" flexDirection="column" m={3} width={500}>
+      <PrettoSlider
+        track="normal"
+        getAriaLabel={() => 'Temperature range'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="on"
+        getAriaValueText={getText}
+        step={1}
+        min={6}
+        max={24}
+        marks={customMarks}
+        aria-labelledby="range-slider"
+        components={{
+          Track: ValueLabelComponent,
+        }}
+        disabled={disabled}
+      />
+    </Box>
+  );
 }

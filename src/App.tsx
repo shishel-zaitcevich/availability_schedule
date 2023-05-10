@@ -1,5 +1,4 @@
 import Schedule from 'components/Schedule';
-
 import React from 'react';
 
 function App() {

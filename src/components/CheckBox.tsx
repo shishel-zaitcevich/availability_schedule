@@ -1,17 +1,22 @@
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
+import { FC } from 'react';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 // const data: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sut'];
 
-export default function Checkboxes() {
-  const [checked, setChecked] = React.useState(true);
-  const handleClick = () => setChecked(!checked);
+interface CheckboxType {
+  checked: boolean;
+  handleToggleCheck:
+    | ((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void)
+    | undefined;
+}
 
+export const Checkboxes: FC<CheckboxType> = ({ checked, handleToggleCheck }) => {
   return (
     <div>
-      <Checkbox {...label} defaultChecked onChange={handleClick} />
+      <Checkbox checked={checked} {...label} defaultChecked onChange={handleToggleCheck} />
     </div>
   );
-}
+};
