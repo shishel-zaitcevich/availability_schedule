@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Slider, { SliderComponentsPropsOverrides, SliderTrack } from '@mui/material/Slider';
+import Slider from '@mui/material/Slider';
 import styled from '@emotion/styled';
-import { Tooltip } from '@mui/material';
-import { ClassNames } from '@emotion/react';
 import './styles.css';
 import classnames from 'classnames';
 
@@ -17,7 +15,7 @@ interface SliderTrackProps {
 }
 
 function ValueLabelComponent(props: SliderTrackProps) {
-  console.log(props);
+  // console.log(props);
 
   const { className, style } = props;
   return (
